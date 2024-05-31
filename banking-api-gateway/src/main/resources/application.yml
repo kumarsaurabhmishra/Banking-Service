@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: banking-api-gateway
+  cloud:
+    gateway:
+      routes:
+      #User Service
+      - id: banking-user-service
+        uri: lb://banking-user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - StripPrefix=1
+      #Fund Service
+      
+      - id: banking-fund-transfer-service
+        uri: lb://banking-fund-transfer-service
+        predicates:
+        - Path=/fund-transfer/**
+        filters:
+        - StripPrefix=1
+          
+    
+    
+server:
+  port: 8082
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+      
+      

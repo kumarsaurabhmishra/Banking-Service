@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: banking-api-gateway
+    
+    
+server:
+  port: 8082
