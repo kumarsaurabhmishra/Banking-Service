@@ -4,6 +4,7 @@ spring:
   cloud:
     gateway:
       routes:
+      
       #User Service
       - id: banking-user-service
         uri: lb://banking-user-service
@@ -11,16 +12,24 @@ spring:
         - Path=/user/**
         filters:
         - StripPrefix=1
-      #Fund Service
       
+      #Fund Service
       - id: banking-fund-transfer-service
         uri: lb://banking-fund-transfer-service
         predicates:
         - Path=/fund-transfer/**
         filters:
         - StripPrefix=1
-          
-    
+        
+      # CORE_BANKING_SERVICE
+      
+      - id: core-banking-service
+        uri:
+          lb://core-banking-service
+        predicates:
+        - Path=/banking-core/**
+        filters:
+        - StripPrefix=1
     
 server:
   port: 8082
@@ -29,5 +38,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8081/eureka
+      
+      
+    
       
       
